@@ -1,0 +1,10 @@
+{% extends "bazar/base.html" %}
+
+{% block content %}
+  <h1>Create Event</h1>
+  <form method="post" class="column">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn">Create Event</button>
+  </form>
+{% endblock %}

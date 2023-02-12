@@ -1,0 +1,14 @@
+{% extends 'bazar/base.html' %}
+
+{% block content %}
+  <h2>Sign up</h2>
+  <form method="post">
+    {% csrf_token %}
+    <input type="text" name="name">
+    <input type="email" name="email" id="">
+    <input type="password" name="password">
+    <input type="tel" name="phone" id="">
+    <p>{{message}}</p>
+    <button type="submit">Sign up</button>
+  </form>
+{% endblock %}

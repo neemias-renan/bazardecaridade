@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <title>Bazar de Caridade</title>
+    <link rel="stylesheet" href="{% static 'bazar/css/base.css' %}">
+</head>
+
+<body>
+    <nav class="navbar padding-default row">
+        <form action="{% url 'bazar:index' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="search_query" class="custom-input" placeholder="Busque um item">
+            <input type="submit" value="Search" class="btn">
+        </form>
+        <ul class="row gap-2">
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'bazar:index' %}" class="color-black">Início</a></li>
+            <li><a href="{% url 'bazar:reserved_items' %}" class="color-black">Itens Reservados</a></li>
+            <li><a href="{% url 'bazar:logout' %}" class="color-black">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'bazar:index' %}" class="color-black">Início</a></li>
+            <li><a href="{% url 'bazar:login' %}" class="color-black">Login</a></li>
+            <li><a href="{% url 'bazar:signup' %}" class="color-black">Criar uma conta</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <main class="margin-top-5 padding-default column">
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+
+</html>

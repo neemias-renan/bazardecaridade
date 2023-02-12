@@ -1,0 +1,11 @@
+{% extends 'bazar/base.html' %}
+
+{% block content %}
+<h1>{{charity_event.name}}</h1>
+<p>{{charity_event.description}}</p>
+<form method="post"  enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Adicionar item</button>
+  </form>
+  {% endblock %}

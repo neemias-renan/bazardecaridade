@@ -1,0 +1,30 @@
+{% extends 'bazar/base.html' %}
+
+{% block content %}
+  <h1 class="margin-zero">{{ charity_event.name }}</h1>
+  <p>{{ charity_event.description }}</p>
+
+  <p>Data de início: {{ charity_event.start_date }}</p>
+  <p>Data de término: {{ charity_event.end_date }}</p>
+
+  {% if user == charity_event.user %}
+    <a href="{% url 'bazar:add_item' charity_event.id %}">Adicionar item</a>
+  {% endif %}
+  <h1>items disponíveis</h1>
+  <ul>
+    {% for item in charity_event.item_set.all %}
+      <li>
+        <img src="{{ item.photo.url }}" alt="{{ item.description }}">
+        <p>{{ item.description }}</p>
+        <p>{{ item.price }}</p>
+
+        {% if user.is_authenticated %}
+        <form action="{% url 'bazar:reserve_items' item.id %}" method="post">
+          {% csrf_token %}
+          <input type="submit" value="Adicionar aos itens reservados">
+        </form>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

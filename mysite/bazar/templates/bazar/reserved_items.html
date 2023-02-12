@@ -1,0 +1,15 @@
+{% extends 'bazar/base.html' %}
+
+{% block content %}
+<h1>Itens Reservados</h1>
+
+{% if reserved_items %}
+    <ul>
+    {% for item in reserved_items %}
+        <li>{{ item.item.description }}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Você ainda não tem itens reservados.</p>
+{% endif %}
+{% endblock %}
